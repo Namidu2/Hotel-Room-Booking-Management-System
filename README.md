@@ -1,64 +1,46 @@
 # Hotel Room Booking Management System
 
-## Project Overview
-A complete Hotel Room Booking Management System developed as an academic ICT2308 Database Systems project.
+A full-stack web application developed as an academic ICT2308 Database Systems project.
 
-## Features
-- Authentication & Authorization (Admin/Staff roles)
-- Dashboard statistics and reports
-- Customer Management (CRUD)
-- Room Type Management (CRUD)
-- Room Management (CRUD)
-- Booking Management (CRUD with availability checking and double booking prevention)
-- Payment Management (CRUD)
+## Tech Stack
+* **Frontend**: Angular 18 (Standalone Components), Bootstrap 5, SCSS, RxJS
+* **Backend**: Node.js, Express.js
+* **Database**: SQLite (via Prisma ORM)
+* **Authentication**: JWT & bcrypt
 
-## Technology Stack
-- **Frontend**: Angular, SCSS
-- **Backend**: Node.js, Express.js
-- **Database**: MySQL, Prisma ORM
-- **Security**: JWT, bcrypt, Helmet, CORS
-
-## System Architecture
-```
-┌─────────────────────┐
-│       Angular       │
-│      Frontend       │
-└──────────┬──────────┘
-           │ REST API
-┌──────────▼──────────┐
-│   Node.js/Express   │
-│       Backend       │
-└──────────┬──────────┘
-           │ Prisma
-┌──────────▼──────────┐
-│        MySQL        │
-│      Database       │
-└─────────────────────┘
-```
+## Features (CRUD & Validation)
+* **Authentication**: Secure Login & Registration with JWT.
+* **Customer Management**: Add, Edit, Delete, List customers.
+* **Room Type Management**: Define room types (Single, Double, Suite), capacities, and prices per night.
+* **Room Management**: Create rooms, assign them to room types, manage status (AVAILABLE, OCCUPIED, MAINTENANCE).
+* **Booking Management**: Book rooms for customers, specify dates, check for double-booking conflicts, auto-calculate total amount.
+* **Payment Management**: Process payments for bookings.
+* **Dashboard**: Statistical overview of customers, rooms, bookings, and revenue.
 
 ## Setup Instructions
 
-### Environment Variables
-Copy `.env.example` to `.env` in the backend directory and update the variables appropriately.
-
-### Database Setup
-Ensure MySQL is running, then run Prisma migrations to initialize the schema:
-```bash
-cd backend
-npx prisma migrate dev
-npx prisma db seed
-```
-
-### Backend Setup
+### 1. Database & Backend
 ```bash
 cd backend
 npm install
-npm run dev
+# Set environment variables (.env file)
+npx prisma generate
+npx prisma db push
+npm run seed  # Seed the admin user and initial data
+npm start
 ```
 
-### Frontend Setup
+### 2. Frontend
 ```bash
 cd frontend
 npm install
 npm start
 ```
+
+## Security & Architecture
+* RESTful API adhering to best practices.
+* Passwords hashed using bcrypt.
+* JWT for stateless authentication.
+* Express-rate-limit to protect against brute force attacks.
+* Helmet for HTTP header security.
+* Data normalized into 3NF using Prisma Schema.

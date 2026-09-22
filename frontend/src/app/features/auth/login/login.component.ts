@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -53,7 +53,7 @@ export class LoginComponent {
         next: () => {
           this.router.navigate([this.returnUrl]);
         },
-        error: error => {
+        error: (error: any) => {
           this.error = error.error?.message || 'Login failed';
           this.loading = false;
         }
