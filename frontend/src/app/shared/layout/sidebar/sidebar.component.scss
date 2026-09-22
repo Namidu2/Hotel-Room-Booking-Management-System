@@ -1,0 +1,16 @@
+.list-group-item {
+  color: #555;
+  font-weight: 500;
+  transition: all 0.2s;
+  
+  &:hover {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+  }
+  
+  &.active {
+    background-color: #E8EEF4;
+    color: var(--primary-color);
+    border-right: 4px solid var(--primary-color) !important;
+  }
+}

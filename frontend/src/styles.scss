@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+:root {
+  --primary-color: #153147;
+  --primary-hover: #214566;
+  --dark-color: #0F2638;
+  --bg-color: #F5F7FB;
+}
+
+body {
+  background-color: var(--bg-color);
+  font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+/* Custom Utilities */
+.text-primary-custom {
+  color: var(--primary-color) !important;
+}
+
+.bg-primary-custom {
+  background-color: var(--primary-color) !important;
+}
+
+.btn-primary-custom {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  
+  &:hover {
+    background-color: var(--primary-hover);
+    color: white;
+  }
+}
