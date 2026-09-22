@@ -1,0 +1,111 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum Role {
+  ADMIN
+  STAFF
+}
+
+enum RoomStatus {
+  AVAILABLE
+  OCCUPIED
+  MAINTENANCE
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CHECKED_IN
+  CHECKED_OUT
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+  BANK_TRANSFER
+  ONLINE
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  REFUNDED
+}
+
+model User {
+  user_id       Int      @id @default(autoincrement())
+  name          String
+  email         String   @unique
+  password_hash String
+  role          Role     @default(STAFF)
+  created_at    DateTime @default(now())
+}
+
+model Customer {
+  customer_id Int       @id @default(autoincrement())
+  first_name  String
+  last_name   String
+  email       String    @unique
+  phone       String
+  address     String?
+  created_at  DateTime  @default(now())
+  
+  bookings    Booking[]
+}
+
+model RoomType {
+  room_type_id    Int      @id @default(autoincrement())
+  type_name       String   @unique
+  description     String?
+  capacity        Int
+  price_per_night Decimal  @db.Decimal(10, 2)
+  created_at      DateTime @default(now())
+  
+  rooms           Room[]
+}
+
+model Room {
+  room_id      Int        @id @default(autoincrement())
+  room_number  String     @unique
+  room_type_id Int
+  floor        String?
+  status       RoomStatus @default(AVAILABLE)
+  created_at   DateTime   @default(now())
+  
+  room_type    RoomType   @relation(fields: [room_type_id], references: [room_type_id])
+  bookings     Booking[]
+}
+
+model Booking {
+  booking_id       Int           @id @default(autoincrement())
+  customer_id      Int
+  room_id          Int
+  check_in_date    DateTime
+  check_out_date   DateTime
+  number_of_guests Int
+  booking_status   BookingStatus @default(PENDING)
+  total_amount     Decimal       @db.Decimal(10, 2)
+  created_at       DateTime      @default(now())
+  
+  customer         Customer      @relation(fields: [customer_id], references: [customer_id])
+  room             Room          @relation(fields: [room_id], references: [room_id])
+  payments         Payment[]
+}
+
+model Payment {
+  payment_id     Int           @id @default(autoincrement())
+  booking_id     Int
+  amount         Decimal       @db.Decimal(10, 2)
+  payment_date   DateTime      @default(now())
+  payment_method PaymentMethod
+  payment_status PaymentStatus @default(PENDING)
+  created_at     DateTime      @default(now())
+  
+  booking        Booking       @relation(fields: [booking_id], references: [booking_id])
+}

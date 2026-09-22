@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// SQLite doesn't support enums, so we use Strings with validation in code or just strings.
+// But Prisma can emulate enums for sqlite in newer versions or we just use String.
+// Actually Prisma on SQLite does NOT support Enums. I'll use String.
+
+model User {
+  user_id       Int      @id @default(autoincrement())
+  name          String
+  email         String   @unique
+  password_hash String
+  role          String   @default("STAFF")
+  created_at    DateTime @default(now())
+}
+
+model Customer {
+  customer_id Int       @id @default(autoincrement())
+  first_name  String
+  last_name   String
+  email       String    @unique
+  phone       String
+  address     String?
+  created_at  DateTime  @default(now())
+  
+  bookings    Booking[]
+}
+
+model RoomType {
+  room_type_id    Int      @id @default(autoincrement())
+  type_name       String   @unique
+  description     String?
+  capacity        Int
+  price_per_night Float
+  created_at      DateTime @default(now())
+  
+  rooms           Room[]
+}
+
+model Room {
+  room_id      Int        @id @default(autoincrement())
+  room_number  String     @unique
+  room_type_id Int
+  floor        String?
+  status       String     @default("AVAILABLE")
+  created_at   DateTime   @default(now())
+  
+  room_type    RoomType   @relation(fields: [room_type_id], references: [room_type_id])
+  bookings     Booking[]
+}
+
+model Booking {
+  booking_id       Int           @id @default(autoincrement())
+  customer_id      Int
+  room_id          Int
+  check_in_date    DateTime
+  check_out_date   DateTime
+  number_of_guests Int
+  booking_status   String        @default("PENDING")
+  total_amount     Float
+  created_at       DateTime      @default(now())
+  
+  customer         Customer      @relation(fields: [customer_id], references: [customer_id])
+  room             Room          @relation(fields: [room_id], references: [room_id])
+  payments         Payment[]
+}
+
+model Payment {
+  payment_id     Int           @id @default(autoincrement())
+  booking_id     Int
+  amount         Float
+  payment_date   DateTime      @default(now())
+  payment_method String
+  payment_status String        @default("PENDING")
+  created_at     DateTime      @default(now())
+  
+  booking        Booking       @relation(fields: [booking_id], references: [booking_id])
+}
