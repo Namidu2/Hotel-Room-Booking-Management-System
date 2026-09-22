@@ -15,6 +15,7 @@ app.use(morgan('dev'));
 
 const authRoutes = require('./routes/auth.routes');
 const customerRoutes = require('./routes/customer.routes');
+const roomTypeRoutes = require('./routes/room-type.routes');
 
 // Basic health check route
 app.get('/api/health', (req, res) => {
@@ -24,6 +25,7 @@ app.get('/api/health', (req, res) => {
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/customers', customerRoutes);
+app.use('/api/room-types', roomTypeRoutes);
 
 // Error handling middleware
 app.use(errorHandler);

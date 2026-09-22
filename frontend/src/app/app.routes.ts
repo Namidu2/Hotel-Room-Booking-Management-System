@@ -5,6 +5,8 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { authGuard } from './core/guards/auth.guard';
 import { CustomerListComponent } from './features/customers/customer-list/customer-list.component';
 import { CustomerFormComponent } from './features/customers/customer-form/customer-form.component';
+import { RoomTypeListComponent } from './features/room-types/room-type-list/room-type-list.component';
+import { RoomTypeFormComponent } from './features/room-types/room-type-form/room-type-form.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -18,6 +20,9 @@ export const routes: Routes = [
       { path: 'customers', component: CustomerListComponent },
       { path: 'customers/add', component: CustomerFormComponent },
       { path: 'customers/edit/:id', component: CustomerFormComponent },
+      { path: 'room-types', component: RoomTypeListComponent },
+      { path: 'room-types/add', component: RoomTypeFormComponent },
+      { path: 'room-types/edit/:id', component: RoomTypeFormComponent },
     ]
   },
   { path: '**', redirectTo: '' }

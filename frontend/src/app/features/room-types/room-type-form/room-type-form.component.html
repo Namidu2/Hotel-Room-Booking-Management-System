@@ -1,0 +1,58 @@
+<div class="container-fluid py-2">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="h3 mb-0 text-dark fw-bold">{{ isEditMode ? 'Edit Room Type' : 'Add Room Type' }}</h2>
+    <a routerLink="/room-types" class="btn btn-light border">
+      <i class="bi bi-arrow-left me-1"></i> Back to List
+    </a>
+  </div>
+
+  <div class="card border-0 shadow-sm rounded-3" style="max-width: 800px;">
+    <div class="card-body p-4 p-md-5">
+      
+      <div *ngIf="error" class="alert alert-danger mb-4">
+        {{ error }}
+      </div>
+      
+      <div *ngIf="loading && isEditMode" class="text-center py-5">
+        <div class="spinner-border text-primary-custom" role="status"></div>
+      </div>
+
+      <form *ngIf="!loading || !isEditMode" [formGroup]="roomTypeForm" (ngSubmit)="onSubmit()">
+        
+        <div class="mb-3">
+          <label class="form-label fw-semibold text-muted">Type Name <span class="text-danger">*</span></label>
+          <input type="text" formControlName="type_name" class="form-control bg-light" [ngClass]="{ 'is-invalid': submitted && f['type_name'].errors }" placeholder="e.g. Deluxe Double">
+          <div *ngIf="submitted && f['type_name'].errors" class="invalid-feedback">Type name is required</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label fw-semibold text-muted">Description</label>
+          <textarea formControlName="description" class="form-control bg-light" rows="3"></textarea>
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted">Capacity <span class="text-danger">*</span></label>
+            <input type="number" formControlName="capacity" class="form-control bg-light" [ngClass]="{ 'is-invalid': submitted && f['capacity'].errors }">
+            <div *ngIf="submitted && f['capacity'].errors" class="invalid-feedback">Capacity must be at least 1</div>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted">Price per Night ($) <span class="text-danger">*</span></label>
+            <input type="number" formControlName="price_per_night" class="form-control bg-light" [ngClass]="{ 'is-invalid': submitted && f['price_per_night'].errors }" step="0.01">
+            <div *ngIf="submitted && f['price_per_night'].errors" class="invalid-feedback">Price must be valid</div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 border-top pt-4">
+          <a routerLink="/room-types" class="btn btn-light px-4">Cancel</a>
+          <button type="submit" [disabled]="loading" class="btn btn-primary-custom px-4">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+            {{ isEditMode ? 'Save Changes' : 'Create Room Type' }}
+          </button>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+</div>
