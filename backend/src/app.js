@@ -13,10 +13,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
+const authRoutes = require('./routes/auth.routes');
+
 // Basic health check route
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'ok', message: 'API is running' });
 });
+
+// API Routes
+app.use('/api/auth', authRoutes);
 
 // Error handling middleware
 app.use(errorHandler);
