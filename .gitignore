@@ -1,0 +1,29 @@
+# Node
+node_modules/
+
+# Environment Variables
+.env
+.env.*
+
+# Build Outputs
+dist/
+
+# Angular
+.angular/
+
+# Testing
+coverage/
+
+# Logs
+*.log
+
+# Editor
+.vscode/
+.idea/
+
+# Passwords and secrets
+passwords
+JWT_SECRET
+database credentials
+API_KEYS
+private credentials
