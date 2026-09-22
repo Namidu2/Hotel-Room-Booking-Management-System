@@ -11,6 +11,8 @@ import { RoomListComponent } from './features/rooms/room-list/room-list.componen
 import { RoomFormComponent } from './features/rooms/room-form/room-form.component';
 import { BookingListComponent } from './features/bookings/booking-list/booking-list.component';
 import { BookingFormComponent } from './features/bookings/booking-form/booking-form.component';
+import { PaymentListComponent } from './features/payments/payment-list/payment-list.component';
+import { PaymentFormComponent } from './features/payments/payment-form/payment-form.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -33,6 +35,9 @@ export const routes: Routes = [
       { path: 'bookings', component: BookingListComponent },
       { path: 'bookings/add', component: BookingFormComponent },
       { path: 'bookings/edit/:id', component: BookingFormComponent },
+      { path: 'payments', component: PaymentListComponent },
+      { path: 'payments/add', component: PaymentFormComponent },
+      { path: 'payments/edit/:id', component: PaymentFormComponent },
     ]
   },
   { path: '**', redirectTo: '' }

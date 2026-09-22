@@ -18,6 +18,7 @@ const customerRoutes = require('./routes/customer.routes');
 const roomTypeRoutes = require('./routes/room-type.routes');
 const roomRoutes = require('./routes/room.routes');
 const bookingRoutes = require('./routes/booking.routes');
+const paymentRoutes = require('./routes/payment.routes');
 
 // Basic health check route
 app.get('/api/health', (req, res) => {
@@ -30,6 +31,7 @@ app.use('/api/customers', customerRoutes);
 app.use('/api/room-types', roomTypeRoutes);
 app.use('/api/rooms', roomRoutes);
 app.use('/api/bookings', bookingRoutes);
+app.use('/api/payments', paymentRoutes);
 
 // Error handling middleware
 app.use(errorHandler);
