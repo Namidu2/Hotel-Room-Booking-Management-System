@@ -7,6 +7,8 @@ import { CustomerListComponent } from './features/customers/customer-list/custom
 import { CustomerFormComponent } from './features/customers/customer-form/customer-form.component';
 import { RoomTypeListComponent } from './features/room-types/room-type-list/room-type-list.component';
 import { RoomTypeFormComponent } from './features/room-types/room-type-form/room-type-form.component';
+import { RoomListComponent } from './features/rooms/room-list/room-list.component';
+import { RoomFormComponent } from './features/rooms/room-form/room-form.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -23,6 +25,9 @@ export const routes: Routes = [
       { path: 'room-types', component: RoomTypeListComponent },
       { path: 'room-types/add', component: RoomTypeFormComponent },
       { path: 'room-types/edit/:id', component: RoomTypeFormComponent },
+      { path: 'rooms', component: RoomListComponent },
+      { path: 'rooms/add', component: RoomFormComponent },
+      { path: 'rooms/edit/:id', component: RoomFormComponent },
     ]
   },
   { path: '**', redirectTo: '' }
