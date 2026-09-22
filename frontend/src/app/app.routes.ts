@@ -9,6 +9,8 @@ import { RoomTypeListComponent } from './features/room-types/room-type-list/room
 import { RoomTypeFormComponent } from './features/room-types/room-type-form/room-type-form.component';
 import { RoomListComponent } from './features/rooms/room-list/room-list.component';
 import { RoomFormComponent } from './features/rooms/room-form/room-form.component';
+import { BookingListComponent } from './features/bookings/booking-list/booking-list.component';
+import { BookingFormComponent } from './features/bookings/booking-form/booking-form.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -28,6 +30,9 @@ export const routes: Routes = [
       { path: 'rooms', component: RoomListComponent },
       { path: 'rooms/add', component: RoomFormComponent },
       { path: 'rooms/edit/:id', component: RoomFormComponent },
+      { path: 'bookings', component: BookingListComponent },
+      { path: 'bookings/add', component: BookingFormComponent },
+      { path: 'bookings/edit/:id', component: BookingFormComponent },
     ]
   },
   { path: '**', redirectTo: '' }
