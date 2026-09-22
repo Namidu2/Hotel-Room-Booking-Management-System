@@ -1,0 +1,68 @@
+<div class="container-fluid py-2">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="h3 mb-0 text-dark fw-bold">{{ isEditMode ? 'Edit Customer' : 'Add Customer' }}</h2>
+    <a routerLink="/customers" class="btn btn-light border">
+      <i class="bi bi-arrow-left me-1"></i> Back to List
+    </a>
+  </div>
+
+  <div class="card border-0 shadow-sm rounded-3" style="max-width: 800px;">
+    <div class="card-body p-4 p-md-5">
+      
+      <div *ngIf="error" class="alert alert-danger mb-4">
+        {{ error }}
+      </div>
+      
+      <div *ngIf="loading && isEditMode" class="text-center py-5">
+        <div class="spinner-border text-primary-custom" role="status"></div>
+      </div>
+
+      <form *ngIf="!loading || !isEditMode" [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted">First Name <span class="text-danger">*</span></label>
+            <input type="text" formControlName="first_name" class="form-control bg-light" [ngClass]="{ 'is-invalid': submitted && f['first_name'].errors }">
+            <div *ngIf="submitted && f['first_name'].errors" class="invalid-feedback">First name is required</div>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted">Last Name <span class="text-danger">*</span></label>
+            <input type="text" formControlName="last_name" class="form-control bg-light" [ngClass]="{ 'is-invalid': submitted && f['last_name'].errors }">
+            <div *ngIf="submitted && f['last_name'].errors" class="invalid-feedback">Last name is required</div>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted">Email <span class="text-danger">*</span></label>
+            <input type="email" formControlName="email" class="form-control bg-light" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+              <div *ngIf="f['email'].errors['required']">Email is required</div>
+              <div *ngIf="f['email'].errors['email']">Must be a valid email</div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted">Phone <span class="text-danger">*</span></label>
+            <input type="text" formControlName="phone" class="form-control bg-light" [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }">
+            <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">Phone is required</div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label fw-semibold text-muted">Address</label>
+          <textarea formControlName="address" class="form-control bg-light" rows="3"></textarea>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 border-top pt-4">
+          <a routerLink="/customers" class="btn btn-light px-4">Cancel</a>
+          <button type="submit" [disabled]="loading" class="btn btn-primary-custom px-4">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+            {{ isEditMode ? 'Save Changes' : 'Create Customer' }}
+          </button>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+</div>
